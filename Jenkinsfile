@@ -19,5 +19,13 @@ pipeline {
             }
         }
     }
+    stage('MVN SONARQUBE') {
+    steps {
+        withSonarQubeEnv('sonarqube-server') {
+            sh 'mvn clean verify sonar:sonar'
+        }
+    }
+}
+
 }
 
