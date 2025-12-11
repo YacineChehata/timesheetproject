@@ -2,31 +2,35 @@ pipeline {
     agent any
 
     tools {
-        jdk 'JAVA_HOME'
-        maven 'M2_HOME'
+        maven 'MAVEN3'
+        jdk 'JDK17'
     }
 
     stages {
-        stage('GIT') {
+
+        stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/hwafa/timesheetproject.git'
+                git branch: 'main', url: 'https://github.com/YacineChehata/timesheetproject.git'
             }
         }
 
-        stage ('Compile Stage') {
+        stage('Compile Stage') {
             steps {
                 bat 'mvn clean compile'
             }
         }
+
         stage('MVN SONARQUBE') {
-    steps {
-        withSonarQubeEnv('sonarqube-server') {
-            bat 'mvn clean verify sonar:sonar'
+            steps {
+                withSonarQubeEnv('sonarqube-server') {
+                    bat """
+                        mvn sonar:sonar ^
+                        -Dsonar.projectKey=timesheet-devops ^
+                        -Dsonar.host.url=http://192.168.33.10:9000 ^
+                        -Dsonar.login=sonar-token
+                    """
+                }
+            }
         }
     }
 }
-    }
-    
-
-}
-
