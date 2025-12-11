@@ -18,14 +18,15 @@ pipeline {
                 bat 'mvn clean compile'
             }
         }
-    }
-    stage('MVN SONARQUBE') {
+        stage('MVN SONARQUBE') {
     steps {
         withSonarQubeEnv('sonarqube-server') {
             sh 'mvn clean verify sonar:sonar'
         }
     }
 }
+    }
+    
 
 }
 
