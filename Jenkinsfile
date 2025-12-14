@@ -34,7 +34,7 @@ pipeline {
                         bat """
                         mvn sonar:sonar ^
                         -Dsonar.projectKey=timesheet-devops ^
-                        -Dsonar.host.url=http://192.168.33.10:9000 ^
+                        -Dsonar.host.url=http://localhost:9000 ^
                         -Dsonar.login=%SONAR_TOKEN%
                         """
                     }
