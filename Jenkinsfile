@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         maven 'M2_HOME'
-        jdk 'JMAVEN_HOME'
+        jdk 'MAVEN_HOME'
     }
 
     environment {
